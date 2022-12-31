@@ -26,10 +26,8 @@ async function getImg(type) {
       return await getDogImg();
     case "Cat":
       return await getCatImg();
-    case "Other":
-      return await getOtherImg();
     default:
-      return await getCatImg();
+      return await getOtherImg();
   }
 }
 
