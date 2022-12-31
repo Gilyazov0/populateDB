@@ -1,6 +1,5 @@
-const axios = require("axios");
-const jsonData = require("./PetsDataSet.json");
-let data = [];
+import axios from "axios";
+import jsonData from "./PetsDataSet.json" assert { type: "json" };
 
 async function getCatImg() {
   const url = "https://cataas.com/cat?json=true";
@@ -48,13 +47,15 @@ async function getData() {
   for (let i = 0; i < jsonData.length; i++) {
     promises.push(getPetObg(jsonData[i]));
   }
-  data = await Promise.all(promises);
+  return await Promise.all(promises);
 }
 
-(async () => {
-  await getData();
+async function postData(data) {
   for (let i = 0; i < data.length; i++) {
     const url = "http://localhost:8080/pet";
     axios.post(url, data[i]);
   }
-})();
+}
+
+const data = await getData();
+postData(data);
